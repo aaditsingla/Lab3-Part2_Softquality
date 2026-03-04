@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: "2026-03-02T15:22:02Z"
+  generation: 1
+  labels:
+    app: binarycalculator-deployment
+  name: binarycalculator-deployment
+  namespace: default
+  resourceVersion: "1772464927360575004"
+  uid: eda89464-3c43-49d3-9576-dc94a4bfd372
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: binarycalculator-deployment
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: binarycalculator-deployment
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/project-1ed2c8e0-2f81-48df-b18/sofe3980u/binarycalculator:latest
+        imagePullPolicy: Always
+        name: binarycalculator
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2026-03-02T15:22:07Z"
+    lastUpdateTime: "2026-03-02T15:22:07Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2026-03-02T15:22:02Z"
+    lastUpdateTime: "2026-03-02T15:22:07Z"
+    message: ReplicaSet "binarycalculator-deployment-668c5669b8" has successfully
+      progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
